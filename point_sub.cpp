@@ -19,29 +19,27 @@ int main(int argc, char** argv)
 	pcl::io::loadPCDFile<PointTypeIO>(argv[1], *cloud_o);
 	pcl::io::loadPCDFile<PointTypeIO>(argv[2], *cloud_d);
 	std::cout << "load file success" << endl;
-	//pcl::copyPointCloud(*cloud_o, *newcloud_o);
-	std::cout << "Cloud1 before filtering£º"<<cloud_o->size()<<endl;
-	std::cout << "Cloud2 before filtering£º" << cloud_d->size() << endl;
+	std::cout << "Cloud1 before filteringï¼š"<<cloud_o->size()<<endl;
+	std::cout << "Cloud2 before filteringï¼š" << cloud_d->size() << endl;
 	for (int i = 0;i < cloud_o->size();i++)
 	{
 		for (int j = 0;j < cloud_d->size();j++)
 		{
 			if (cloud_o->points[i].x == cloud_d->points[j].x && cloud_o->points[i].y == cloud_d->points[j].y && cloud_o->points[i].z == cloud_d->points[j].z)
 			{
-				cloud_o->points[i].z = 10000;//¸³ÓèÒ»¸ö¿Ï¶¨ÎÞÐ§µÄÖµ
+				cloud_o->points[i].z = 10000;//èµ‹äºˆä¸€ä¸ªè‚¯å®šæ— æ•ˆçš„å€¼
 			}
 
 			else
 			{
-				//std::cout << i << std::endl;
 				continue;
 			}
 		}
 		if (i % 1000 == 0)
-			std::cout << "µÚ" << i << "²½" << std::endl;
+			std::cout << "ç¬¬" << i << "æ­¥" << std::endl;
 	}
 
-	//Ö±Í¨ÂË²¨
+	//ç›´é€šæ»¤æ³¢
 	std::cerr << "start to filter" << std::endl;
 	pcl::PointCloud<PointTypeIO>::Ptr cloud_filtered(new pcl::PointCloud<PointTypeIO>);
 	pcl::PassThrough<PointTypeIO> pass;
